@@ -25,6 +25,7 @@ int main() {
         seen[numbersArray[end]] = true;
         score += (end - start + 1);
     }
+    
     cout << score;
 
     return 0;
