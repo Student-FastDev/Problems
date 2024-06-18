@@ -27,6 +27,7 @@ int findLastDigit(int n) {
 int main() {
     int N;
     cin >> N;
+    
     cout << (findLastDigit(N) + findLastDigit(N - 2)) % 10;
     return 0;
 }
