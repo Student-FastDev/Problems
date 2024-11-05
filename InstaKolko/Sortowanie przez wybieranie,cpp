@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int numBlocks;
+    cin >> numBlocks;
+    
+    vector<long long> blocks(numBlocks);
+    for (int i = 0; i < numBlocks; i++) {
+        cin >> blocks[i];
+    }
+    
+    for (int i = 0; i < numBlocks - 1; i++) {
+        int minIndex = i;
+        
+        for (int j = i + 1; j < numBlocks; j++) {
+            if (blocks[j] < blocks[minIndex]) {
+                minIndex = j;
+            }
+        }
+        
+        if (minIndex != i) {
+            swap(blocks[i], blocks[minIndex]);
+        }
+    }
+    
+    for (int i = 0; i < numBlocks; i++) {
+        cout << blocks[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
