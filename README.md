@@ -12,3 +12,11 @@ If you’re looking to improve your competitive programming skills or find more 
 - [CP-Algorithms](https://cp-algorithms.com): A comprehensive resource with useful techniques and algorithms for competitive programming.
 - [E-maxx](https://e-maxx.ru/algo): A Russian site offering various algorithms and techniques for problem-solving in competitive programming.
 - [GeeksforGeeks](https://www.geeksforgeeks.org): An extensive site with articles, tutorials, and examples related to algorithms and data structures.
+
+---
+
+<div align="center">  
+<img src="https://www.oi.edu.pl/static/attachment/20200421/logo-oi-kolorowe_1.png" alt="OI Logo" width="50px">  
+<img src="https://cdn.iconscout.com/icon/free/png-256/free-code-forces-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-2-pack-logos-icons-2944796.png?f=webp&w=256" alt="Codeforces Logo" width="60px">  
+<img src="https://i.imgur.com/1mSIKP4.png" alt="GeeksforGeeks Logo" width="60px">  
+</div>  
