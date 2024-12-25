@@ -39,40 +39,28 @@ int main() {
                 sumsSet.insert(currentSum);
             }
         } else {
-            long long currentSum = 0;
-            set<long long> leftSums;
-            leftSums.insert(0);
+            long long maxLeft = 0, minLeft = 0;
+            long long maxRight = 0, minRight = 0;
+
+            long long prefixSum = 0;
             for (long long i = xIndex - 1; i >= 0; i--) {
-                currentSum += array[i];
-                leftSums.insert(currentSum);
+                prefixSum += array[i];
+                maxLeft = max(maxLeft, prefixSum);
+                minLeft = min(minLeft, prefixSum);
             }
- 
-            currentSum = 0;
-            set<long long> rightSums;
-            rightSums.insert(0);
+
+            prefixSum = 0;
             for (long long i = xIndex + 1; i < N; i++) {
-                currentSum += array[i];
-                rightSums.insert(currentSum);
+                prefixSum += array[i];
+                maxRight = max(maxRight, prefixSum);
+                minRight = min(minRight, prefixSum);
             }
- 
-            for (long long l : leftSums) {
-                for (long long r : rightSums) {
-                    sumsSet.insert(l + r);
-                    sumsSet.insert(l + r + x);
-                }
-            }
- 
-            sumsSet.insert(x);
- 
-            currentSum = x;
-            for (long long i = xIndex - 1; i >= 0; i--) {
-                currentSum += array[i];
-                sumsSet.insert(currentSum);
-            }
-            currentSum = x;
-            for (long long i = xIndex + 1; i < N; i++) {
-                currentSum += array[i];
-                sumsSet.insert(currentSum);
+
+            long long overallMin = min({minLeft + x, minRight + x, minLeft + minRight + x});
+            long long overallMax = max({maxLeft + x, maxRight + x, maxLeft + maxRight + x});
+
+            for (long long i = overallMin; i <= overallMax; i++) {
+                sumsSet.insert(i);
             }
         }
  
@@ -108,6 +96,8 @@ int main() {
         for (long long i = minRight; i <= maxRight; i++) {
             sumsSet.insert(i);
         }
+        
+        sumsSet.insert(0);
  
         vector<long long> resultArray(sumsSet.begin(), sumsSet.end());
         cout << resultArray.size() << "\n";
