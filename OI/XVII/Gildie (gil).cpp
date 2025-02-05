@@ -3,6 +3,7 @@ using namespace std;
 
 const int MAX_N = 200001;
 vector<int> neighbourList[MAX_N];
+
 int guildArray[MAX_N];
 
 void DFS(int A, int P) {
