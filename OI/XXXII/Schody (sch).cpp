@@ -20,7 +20,7 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 #define size(x)  x.size()
 
 const ll INF = 9223372036854775806;
-const ll MAX_N = 1e9+1; // Template constant (not used for array size here)
+const ll MAX_N = 1e9+1;
 const ll MOD = 1e9+7; 
 
 const int MAX_ARRAY_SIZE = 1000005;
