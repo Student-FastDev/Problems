@@ -45,9 +45,9 @@ int excludeNeighbours(int u, int v) {
     return 0;
 }
 
-void replaceNeighbours(int node, int old_val, int new_val) {
-    if (neighbourList[node][0] == old_val) neighbourList[node][0] = new_val;
-    else if (neighbourList[node][1] == old_val) neighbourList[node][1] = new_val;
+void replaceNeighbours(int node, int oldValue, int newValue) {
+    if (neighbourList[node][0] == oldValue) neighbourList[node][0] = newValue;
+    else if (neighbourList[node][1] == oldValue) neighbourList[node][1] = newValue;
 }
 
 bool areNeighbours(int u, int v) {
