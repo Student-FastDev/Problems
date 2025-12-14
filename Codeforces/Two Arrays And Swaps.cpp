@@ -1,5 +1,4 @@
 // Catling
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,53 +21,41 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 const ll INF = 9223372036854775806;
 const ll MAX_N = 1e9+1;
-const ll MOD = 1e9+7; 
+const ll MOD = 1e9+7; // 998244353
 
 void solveTestCase() {
     int N, K;
-    ll L;
-    cin >> N >> K >> L;
-    
-    int M = N * K;
-    vector<ll> A(M);
-    for(int i = 0; i < M; ++i) cin >> A[i];
-    
+    cin >> N >> K;
+
+    vector<int> A(N);
+    for(int i = 0; i < N; ++i) cin >> A[i];
+
+    vector<int> B(N);
+    for(int i = 0; i < N; ++i) cin >> B[i];
+
     sort(all(A));
-    
-    auto iterator = upper_bound(all(A), A[0] + L);
-    int validCount = distance(A.begin(), iterator);
-    
-    if (validCount < N) {
-        cout << 0 << endl;
-        return;
-    }
-    
-    ll totalVolume = 0;
-    int currentIndex = 0;
-    int lastValidIndex = validCount - 1;
-    
-    for (int i = 1; i <= N; ++i) {
-        totalVolume += A[currentIndex];
-        
-        int remainingRight = lastValidIndex - currentIndex;
-        int neededReserve = N - i;
-        int availableForFillers = remainingRight - neededReserve;
-        
-        int take = 0;
-        if (availableForFillers > 0) {
-            take = min(K - 1, availableForFillers);
+    sort(all(B), greater<int>());
+
+    for(int i = 0; i < K; ++i) {
+        if (A[i] < B[i]) {
+            swap(A[i], B[i]);
+        } else {
+            break;
         }
-        
-        currentIndex += 1 + take;
     }
-    
-    cout << totalVolume << endl;
+
+    ll totalSum = 0;
+    for(int value : A) {
+        totalSum += value;
+    }
+    cout << totalSum << endl;
 }
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
-    int T = 1;
+    int T;
+    cin >> T;
 
     while(T--) {
         solveTestCase();

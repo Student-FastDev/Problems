@@ -1,5 +1,4 @@
 // Catling
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,47 +21,41 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 const ll INF = 9223372036854775806;
 const ll MAX_N = 1e9+1;
-const ll MOD = 1e9+7; 
+const ll MOD = 1e9+7; // 998244353
 
 void solveTestCase() {
-    int N, K;
-    ll L;
-    cin >> N >> K >> L;
-    
-    int M = N * K;
-    vector<ll> A(M);
-    for(int i = 0; i < M; ++i) cin >> A[i];
-    
-    sort(all(A));
-    
-    auto iterator = upper_bound(all(A), A[0] + L);
-    int validCount = distance(A.begin(), iterator);
-    
-    if (validCount < N) {
-        cout << 0 << endl;
-        return;
-    }
-    
-    ll totalVolume = 0;
-    int currentIndex = 0;
-    int lastValidIndex = validCount - 1;
-    
+    int N;
+    cin >> N;
+    vector<ll> A(N + 1);
+    A[0] = 0;
     for (int i = 1; i <= N; ++i) {
-        totalVolume += A[currentIndex];
-        
-        int remainingRight = lastValidIndex - currentIndex;
-        int neededReserve = N - i;
-        int availableForFillers = remainingRight - neededReserve;
-        
-        int take = 0;
-        if (availableForFillers > 0) {
-            take = min(K - 1, availableForFillers);
-        }
-        
-        currentIndex += 1 + take;
+        cin >> A[i];
     }
-    
-    cout << totalVolume << endl;
+
+    vector<ll> diffArray(N);
+    for (int i = 0; i < N; ++i) {
+        diffArray[i] = A[i + 1] - A[i];
+    }
+
+    vector<int> possibleLengths;
+    for (int k = 1; k <= N; ++k) {
+        bool isValid = true;
+        for (int i = 0; i < N - k; ++i) {
+            if (diffArray[i] != diffArray[i + k]) {
+                isValid = false;
+                break;
+            }
+        }
+        if (isValid) {
+            possibleLengths.push_back(k);
+        }
+    }
+
+    cout << size(possibleLengths) << endl;
+    for (int i = 0; i < size(possibleLengths); ++i) {
+        cout << possibleLengths[i] << (i == size(possibleLengths) - 1 ? "" : " ");
+    }
+    cout << endl;
 }
 
 int main() {
@@ -70,7 +63,7 @@ int main() {
 
     int T = 1;
 
-    while(T--) {
+    while (T--) {
         solveTestCase();
     }
     return 0;

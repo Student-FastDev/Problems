@@ -1,0 +1,76 @@
+// Catling
+#include <bits/stdc++.h>
+using namespace std;
+
+#ifdef DEBUG
+auto operator<<(auto&o,auto p)->decltype(p.first,o){return o<<'('<<p.first<<", "<<p.second <<')';}
+auto operator<<(auto&o,auto x)->decltype(x.end(),o){o<<'{';int i=2;for(auto e:x)o<<(", ")+i<<e,i=0;return o<<'}';}
+#define LOG(x...)cerr<<"["#x"]: ",[](auto...$){((cerr<<$<<"; "),...)<<endl;}(x);
+#else
+#define LOG(x...)(void)0
+#endif
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int, int> pii;
+mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
+
+#define all(x)  (x).begin(),(x).end()
+#define endl    '\n'
+#define size(x)  x.size()
+
+const ll INF = 9223372036854775806;
+const ll MAX_N = 1e9+1;
+const ll MOD = 1e9+7; // 998244353
+
+void solveTestCase() {
+    ll A, B, C;
+    cin >> A >> B >> C;
+
+    ll fullWeeks = min({A / 3, B / 2, C / 2});
+
+    A -= fullWeeks * 3;
+    B -= fullWeeks * 2;
+    C -= fullWeeks * 2;
+
+    vector<int> weeklySchedule = {0, 1, 2, 0, 2, 1, 0};
+    ll maxAdditionalDays = 0;
+
+    for (int startDay = 0; startDay < 7; ++startDay) {
+        ll tempA = A;
+        ll tempB = B;
+        ll tempC = C;
+        ll currentDays = 0;
+        int dayIndex = startDay;
+
+        while (true) {
+            int foodType = weeklySchedule[dayIndex];
+            if (foodType == 0) {
+                if (tempA > 0) tempA--;
+                else break;
+            } else if (foodType == 1) {
+                if (tempB > 0) tempB--;
+                else break;
+            } else {
+                if (tempC > 0) tempC--;
+                else break;
+            }
+            currentDays++;
+            dayIndex = (dayIndex + 1) % 7;
+        }
+        maxAdditionalDays = max(maxAdditionalDays, currentDays);
+    }
+
+    cout << fullWeeks * 7 + maxAdditionalDays << endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+
+    int T = 1;
+
+    while(T--) {
+        solveTestCase();
+    }
+    return 0;
+}
