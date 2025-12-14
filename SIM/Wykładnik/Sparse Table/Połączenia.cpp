@@ -23,7 +23,6 @@ const ll INF = 9223372036854775806LL;
 const ll MAX_N = 1e9+1;
 const ll MOD = 1e9+7;
 
-// ===== FAST I/O =====
 static inline int readChar() {
     int c = getchar_unlocked();
     return c;
@@ -66,7 +65,6 @@ inline void writeLongLong(long long x) {
 }
 
 inline void writeEndl() { putChar('\n'); }
-// ====================
 
 void solveTestCase() {
     int N = readInt();
