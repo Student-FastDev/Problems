@@ -50,40 +50,41 @@ struct Edge {
 
 int globalN, globalM;
 vector<Edge> edgesArray;
-vector<ll> modifiedW;
-vector<int> indexOrder;
-
-bool compareIndex(int a, int b) {
-    return modifiedW[a] < modifiedW[b];
-}
+vector<int> zeroIndex, firstIndex;
 
 pll lambdaMST(ll lambda) {
     int n = globalN;
-    int m = globalM;
-    modifiedW.assign(m, 0);
-    indexOrder.resize(m);
-
-    for (int i = 0; i < m; ++i) {
-        modifiedW[i] = (ll)edgesArray[i].W + lambda * (ll)edgesArray[i].edgeType;
-        indexOrder[i] = i;
-    }
-    sort(indexOrder.begin(), indexOrder.end(), compareIndex);
-
     DSU findUnion(n);
     ll total = 0;
     int firstTypeUsed = 0;
     int usedEdges = 0;
 
-    for (int i = 0; i < size(indexOrder); ++i) {
-        int index = indexOrder[i];
-        Edge &e = edgesArray[index];
-        if (findUnion.unite(e.U, e.V)) {
-            total += modifiedW[index];
-            firstTypeUsed += e.edgeType;
+    int zeroP = 0, firstP = 0;
+    int zeroSize = size(zeroIndex);
+    int firstSize = size(firstIndex);
+
+    while (usedEdges < n - 1 && (zeroP < zeroSize || firstP < firstSize)) {
+        ll zeroWeight = (zeroP < zeroSize) ? edgesArray[zeroIndex[zeroP]].W : INF;
+        ll firstWeight = (firstP < firstSize) ? (ll)edgesArray[firstIndex[firstP]].W + lambda : INF;
+
+        int index;
+        ll currentW;
+
+        if (firstWeight <= zeroWeight) {
+            index = firstIndex[firstP++];
+            currentW = firstWeight;
+        } else {
+            index = zeroIndex[zeroP++];
+            currentW = zeroWeight;
+        }
+
+        if (findUnion.unite(edgesArray[index].U, edgesArray[index].V)) {
+            total += currentW;
+            firstTypeUsed += edgesArray[index].edgeType;
             ++usedEdges;
-            if (usedEdges == n - 1) break;
         }
     }
+
     if (usedEdges < n - 1) return make_pair(INF, -1);
     return make_pair(total, firstTypeUsed);
 }
@@ -103,6 +104,9 @@ void solveTestCase() {
     }
 
     edgesArray.resize(m);
+    zeroIndex.clear(); zeroIndex.reserve(m);
+    firstIndex.clear(); firstIndex.reserve(m);
+    
     ll sumW = 0;
     for (int i = 0; i < m; ++i) {
         int U, V, W;
@@ -114,7 +118,14 @@ void solveTestCase() {
         bool B = specialArray[V] != 0;
         edgesArray[i].edgeType = (A ^ B) ? 1 : 0;
         sumW += W;
+
+        if (edgesArray[i].edgeType == 1) firstIndex.push_back(i);
+        else zeroIndex.push_back(i);
     }
+
+    auto compareFunction = [](int i, int j) { return edgesArray[i].W < edgesArray[j].W; };
+    sort(all(zeroIndex), compareFunction);
+    sort(all(firstIndex), compareFunction);
 
     DSU findUnion(n);
     for (int i = 0; i < m; ++i) findUnion.unite(edgesArray[i].U, edgesArray[i].V);
