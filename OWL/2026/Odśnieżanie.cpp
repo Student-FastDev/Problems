@@ -24,7 +24,7 @@ const ll MAX_N = 1e9+1;
 const ll MOD = 1e9+7;
 
 struct Point {
-    int r, c, L, R;
+    int row, column, L, R;
 };
 
 vector<ll> solveOne(const vector<int>& H) {
@@ -64,11 +64,11 @@ vector<ll> solveOne(const vector<int>& H) {
 
 void solveTestCase() {
     int N, S;
-    if(!(cin >> N >> S)) return;
+    cin >> N >> S;
 
     vector<Point> pointsArray(S);
     for(int i = 0; i < S; ++i) {
-        cin >> pointsArray[i].r >> pointsArray[i].c;
+        cin >> pointsArray[i].row >> pointsArray[i].column;
     }
 
     if(S == 0) {
@@ -77,12 +77,12 @@ void solveTestCase() {
     }
 
     sort(all(pointsArray), [](const Point& a, const Point& b) {
-        if(a.r != b.r) return a.r < b.r;
-        return a.c < b.c;
+        if(a.row != b.row) return a.row < b.row;
+        return a.column < b.column;
     });
 
     for(int i = 0; i < S; ++i) {
-        if(i > 0 && pointsArray[i].r == pointsArray[i-1].r && pointsArray[i].c == pointsArray[i-1].c + 1) {
+        if(i > 0 && pointsArray[i].row == pointsArray[i-1].row && pointsArray[i].column == pointsArray[i-1].column + 1) {
             pointsArray[i].L = pointsArray[i-1].L + 1;
         } else {
             pointsArray[i].L = 1;
@@ -90,7 +90,7 @@ void solveTestCase() {
     }
 
     for(int i = S - 1; i >= 0; --i) {
-        if(i < S - 1 && pointsArray[i].r == pointsArray[i+1].r && pointsArray[i].c == pointsArray[i+1].c - 1) {
+        if(i < S - 1 && pointsArray[i].row == pointsArray[i+1].row && pointsArray[i].column == pointsArray[i+1].column - 1) {
             pointsArray[i].R = pointsArray[i+1].R + 1;
         } else {
             pointsArray[i].R = 1;
@@ -98,15 +98,15 @@ void solveTestCase() {
     }
 
     sort(all(pointsArray), [](const Point& a, const Point& b) {
-        if(a.c != b.c) return a.c < b.c;
-        return a.r < b.r;
+        if(a.column != b.column) return a.column < b.column;
+        return a.row < b.row;
     });
 
     ll finalAnswer = 0;
     int i = 0;
     while(i < S) {
         int j = i;
-        while(j < S - 1 && pointsArray[j+1].c == pointsArray[j].c && pointsArray[j+1].r == pointsArray[j].r + 1) {
+        while(j < S - 1 && pointsArray[j+1].column == pointsArray[j].column && pointsArray[j+1].row == pointsArray[j].row + 1) {
             j++;
         }
         
