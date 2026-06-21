@@ -1,6 +1,6 @@
-# Competitive Programming Problems
+# Problems
 
-Welcome to my repository of competitive programming exercises! This repository contains a collection of coding problems I've tackled to enhance my skills in algorithmic thinking and problem-solving. Each exercise is designed to challenge different aspects of programming, including data structures, algorithms, and optimization techniques.
+Welcome to my repository of competitive programming exercises! This repository contains a collection of coding problems I've tackled to enhance my skills in algorithmic thinking and problem-solving. 
 
 ## Resources for Competitive Programming
 
@@ -16,7 +16,5 @@ If you’re looking to improve your competitive programming skills or find more 
 ---
 
 <div align="center">  
-<img src="https://oi.edu.pl/static/images/logo_oi.png" alt="OI Logo" width="50px">  
 <img src="https://cdn.iconscout.com/icon/free/png-256/free-code-forces-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-2-pack-logos-icons-2944796.png?f=webp&w=256" alt="Codeforces Logo" width="60px">  
-<img src="https://i.imgur.com/1mSIKP4.png" alt="GeeksforGeeks Logo" width="60px">  
 </div>  
