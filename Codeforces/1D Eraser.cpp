@@ -44,7 +44,7 @@ int main() {
 
     int T;
     cin >> T;
-
+ 
     while(T--) {
         solveTestCase();
     }
