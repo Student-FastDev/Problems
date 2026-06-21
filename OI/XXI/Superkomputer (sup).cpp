@@ -50,7 +50,7 @@ void BFS(int startNode) {
             queueArray[tail++] = v;
         }
     }
-}
+} 
 
 int solveQuery(int k) {
     if (k >= N) return maxDepth;
