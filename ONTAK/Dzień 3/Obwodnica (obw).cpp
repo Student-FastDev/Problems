@@ -8,7 +8,7 @@ auto operator<<(auto&o,auto x)->decltype(x.end(),o){o<<'{';int i=2;for(auto e:x)
 #define LOG(x...)cerr<<"["#x"]: ",[](auto...$){((cerr<<$<<"; "),...)<<endl;}(x);
 #else
 #define LOG(x...)(void)0
-#endif
+#endif 
 
 typedef long long ll;
 typedef pair<ll,ll> pll;
