@@ -17,7 +17,7 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 #define all(x)  (x).begin(),(x).end()
 #define endl    '\n'
-#define size_of(x)  (x).size()
+#define size(x)  (x).size()
 
 const ll INF = 1e9+67;
 const ll MAX_N = 2e3+67;
@@ -122,8 +122,8 @@ void solveTestCase() {
 
     if(foundCycle) {
         cout << "CYKL" << endl;
-        cout << size_of(cyclePath) << endl;
-        for(int i = 0; i < size_of(cyclePath); i++) cout << cyclePath[i] << " ";
+        cout << size(cyclePath) << endl;
+        for(int i = 0; i < size(cyclePath); i++) cout << cyclePath[i] << " ";
         cout << endl;
     } else {
         cout << "PODZIAL" << endl;
